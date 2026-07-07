@@ -245,5 +245,9 @@ app.post('/api/poems/:id/comment', async (req, res) => {
 // ============================================
 // START SERVER
 // ============================================
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+// Replace this block at the bottom of your server.js:
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+
+// With this export line:
+module.exports = app;
