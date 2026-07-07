@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Ones Library | Contact</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">✨ Lucky Ones Library</div>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="books.html">Books</a>
+        <a href="poems.html">Poems</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="admin-login.html" id="adminBtn" style="display:none; background:rgba(185,147,90,0.15); color:var(--gold-main);">
+            <i class="fas fa-lock"></i> Admin
+        </a>
+        <a href="#" id="logoutBtn" onclick="adminLogout()" style="display:none; color:#e74c3c;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <p class="page-header-tag"><i class="fas fa-envelope"></i> &nbsp; Get In Touch</p>
+    <h1>Contact <span style="color:var(--gold-main);">Us</span></h1>
+    <p>We would like to hear from you</p>
+</div>
+
+<div class="container">
+
+    <!-- Back Button -->
+    <div style="margin-bottom:36px;">
+        <a href="index.html" class="btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+    </div>
+
+    <!-- Contact Grid -->
+    <div class="contact-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,5vw,60px); align-items:center;">
+
+        <!-- LEFT: Photo -->
+        <div style="text-align:center;">
+            <div style="position:relative; display:inline-block;">
+                <img
+                    src="assets/abaut us (2).png"
+                    alt="N.Damien"
+                    style="width:clamp(180px,28vw,300px); border-radius:var(--radius-lg); border:3px solid var(--gold-main); box-shadow:var(--shadow-gold),var(--shadow-deep); display:block; margin:0 auto; object-fit:cover;"
+                >
+                <div style="position:absolute; bottom:-14px; left:50%; transform:translateX(-50%); background:var(--gold-main); color:var(--dark-1); padding:5px 18px; border-radius:30px; font-size:0.68rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; white-space:nowrap;">
+                    ✨ Founder & Author
+                </div>
+            </div>
+
+            <h2 style="font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.5vw,1.9rem); color:var(--text-white); margin-top:36px;">N.Damien</h2>
+            <p style="color:var(--text-muted); font-size:0.85rem; letter-spacing:1px; margin-top:6px;">Poet · Philosopher · Curator</p>
+
+            <!-- Social Icons -->
+            <div style="display:flex; gap:12px; justify-content:center; margin-top:22px;">
+                <a href="https://wa.me/+250790718110" target="_blank"
+                   style="width:44px; height:44px; border-radius:50%; background:rgba(37,211,102,0.12); border:1px solid rgba(37,211,102,0.3); color:#25d366; display:flex; align-items:center; justify-content:center; font-size:1.15rem; text-decoration:none; transition:all 0.3s;"
+                   onmouseover="this.style.background='#25d366'; this.style.color='white';"
+                   onmouseout="this.style.background='rgba(37,211,102,0.12)'; this.style.color='#25d366';">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:niyonteze72@gmail.com"
+                   style="width:44px; height:44px; border-radius:50%; background:rgba(185,147,90,0.12); border:1px solid var(--glass-border); color:var(--gold-main); display:flex; align-items:center; justify-content:center; font-size:1.15rem; text-decoration:none; transition:all 0.3s;"
+                   onmouseover="this.style.background='var(--gold-main)'; this.style.color='black';"
+                   onmouseout="this.style.background='rgba(185,147,90,0.12)'; this.style.color='var(--gold-main)';">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- RIGHT: Contact Card -->
+        <div style="background:var(--dark-2); border:1px solid var(--glass-border); border-radius:var(--radius-lg); padding:clamp(22px,4vw,44px);">
+            <h2 style="font-family:'Playfair Display',serif; font-size:clamp(1.2rem,2.5vw,1.7rem); color:var(--text-white); margin-bottom:12px;">
+                Want to reach out?
+            </h2>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8; margin-bottom:28px;">
+                Whether you want to collaborate, share feedback, or simply connect — we are here. Click the button below to chat with us directly on WhatsApp.
+            </p>
+
+            <!-- WhatsApp Button -->
+            <a href="https://wa.me/+250790718110" target="_blank"
+               style="display:inline-flex; align-items:center; gap:10px; background:#25d366; color:white; padding:clamp(11px,1.8vw,15px) clamp(20px,3vw,32px); text-decoration:none; border-radius:50px; font-weight:700; font-size:clamp(0.8rem,1.5vw,0.9rem); letter-spacing:1px; text-transform:uppercase; transition:all 0.3s; box-shadow:0 4px 20px rgba(37,211,102,0.3);"
+               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 30px rgba(37,211,102,0.45)';"
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(37,211,102,0.3)';">
+                <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> Chat on WhatsApp
+            </a>
+
+            <div style="border-top:1px solid var(--glass-border); margin:clamp(20px,3vw,30px) 0;"></div>
+
+            <!-- Info Items -->
+            <div style="display:flex; flex-direction:column; gap:16px;">
+
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="width:40px; height:40px; flex-shrink:0; border-radius:10px; background:rgba(185,147,90,0.1); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; color:var(--gold-main);">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <div style="font-size:0.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:2px;">Location</div>
+                        <div style="color:var(--text-white); font-size:0.9rem;">Kigali, Rwanda</div>
+                    </div>
+                </div>
+
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="width:40px; height:40px; flex-shrink:0; border-radius:10px; background:rgba(185,147,90,0.1); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; color:var(--gold-main);">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <div style="font-size:0.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:2px;">Email</div>
+                        <div style="color:var(--text-white); font-size:0.88rem; word-break:break-all;">niyonteze72@gmail.com</div>
+                    </div>
+                </div>
+
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="width:40px; height:40px; flex-shrink:0; border-radius:10px; background:rgba(185,147,90,0.1); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; color:var(--gold-main);">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <div style="font-size:0.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:2px;">Response Time</div>
+                        <div style="color:var(--text-white); font-size:0.9rem;">Within 24 hours</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="page-padding"></div>
+
+<footer>
+    <marquee>MISSION: To spread wisdom through poetry and literature &nbsp;|&nbsp; VISION: To be the leading digital library now and onwards &nbsp;|&nbsp; Lucky Ones Library © 2025</marquee>
+</footer>
+
+<script src="script.js"></script>
+<script>
+    function checkAdminSession() {
+        const admin = sessionStorage.getItem('isAdmin') === 'true';
+        document.getElementById('logoutBtn').style.display = admin ? 'inline-block' : 'none';
+        document.getElementById('adminBtn').style.display  = admin ? 'none' : 'inline-block';
+    }
+    function adminLogout() {
+        sessionStorage.removeItem('isAdmin');
+        window.location.reload();
+    }
+    checkAdminSession();
+</script>
+</body>
+</html>

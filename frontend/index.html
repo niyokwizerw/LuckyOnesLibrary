@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Ones Library | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">✨ Lucky Ones Library</div>
+    <div class="menu">
+        <a href="index.html" class="active">Home</a>
+        <a href="books.html">Books</a>
+        <a href="poems.html">Poems</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin-login.html" id="adminBtn" style="display:none; background:rgba(185,147,90,0.15); color:var(--gold-main);">
+            <i class="fas fa-lock"></i> Admin
+        </a>
+        <a href="#" id="logoutBtn" onclick="adminLogout()" style="display:none; color:#e74c3c;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search books...">
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="slider">
+        <img src="assets/photo1.png" class="slide-img active" alt="Slide 1">
+        <img src="assets/photo2.png" class="slide-img" alt="Slide 2">
+        <img src="assets/photo3.png" class="slide-img" alt="Slide 3">
+    </div>
+    <div class="hero-content">
+        <h1 class="hero-text">Welcome to<br><span style="color:var(--gold-light);">Lucky Ones Library</span></h1>
+        <p class="hero-sub">Poetry &nbsp;·&nbsp; Literature &nbsp;·&nbsp; Wisdom</p>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- ADMIN MESSAGE BOX -->
+    <div id="adminMessageBox" style="display:none;" class="admin-message-box">
+        <div class="tag"><i class="fas fa-bullhorn"></i> &nbsp; Message from the Library</div>
+        <p id="adminMessageText"></p>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat-item"><div class="stat-number" id="statBooks">0</div><div class="stat-label">Books</div></div>
+        <div class="stat-item"><div class="stat-number" id="statPoems">0</div><div class="stat-label">Poems</div></div>
+        <div class="stat-item"><div class="stat-number" id="statLikes">0</div><div class="stat-label">Total Likes</div></div>
+        <div class="stat-item"><div class="stat-number" id="statComments">0</div><div class="stat-label">Comments</div></div>
+    </div>
+
+    <!-- WISDOM QUOTES -->
+    <div class="quote-box">
+        <h3><i class="fas fa-feather-alt"></i> &nbsp; Wisdom of the Day</h3>
+        <p id="quoteDisplay">"The only true wisdom is in knowing you know nothing." — Socrates</p>
+    </div>
+
+    <div class="gold-divider"><span>❖</span></div>
+
+    <!-- NEW ARRIVALS -->
+    <div class="section-title">New <span style="color:var(--gold-main);">Arrivals</span></div>
+    <div class="section-subtitle">Latest books added to the library</div>
+    <div id="latestBooks" class="books-grid"></div>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="books.html" class="btn-secondary"><i class="fas fa-book-open"></i> &nbsp; View All Books</a>
+    </div>
+
+    <div class="gold-divider"><span>❖</span></div>
+
+    <!-- LATEST POEMS -->
+    <div class="section-title">Featured <span style="color:var(--gold-main);">Poems</span></div>
+    <div class="section-subtitle">Latest poems from the collection</div>
+    <div id="latestPoems" class="books-grid"></div>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="poems.html" class="btn-secondary"><i class="fas fa-feather-alt"></i> &nbsp; View All Poems</a>
+    </div>
+
+    <!-- ADMIN CONTROL PANEL -->
+    <div class="admin-panel" id="adminPanel" style="display:none;">
+        <h3><i class="fas fa-tools"></i> &nbsp; Control Panel</h3>
+
+        <!-- Tab Switcher -->
+        <div class="tab-bar">
+            <button class="btn-primary"   onclick="switchTab('book')" id="tabBook"><i class="fas fa-book"></i> &nbsp; Upload Book</button>
+            <button class="btn-secondary" onclick="switchTab('poem')" id="tabPoem"><i class="fas fa-feather-alt"></i> &nbsp; Upload Poem</button>
+            <button class="btn-secondary" onclick="switchTab('msg')"  id="tabMsg"><i class="fas fa-bullhorn"></i> &nbsp; Home Message</button>
+        </div>
+
+        <!-- ===== UPLOAD BOOK FORM ===== -->
+        <div id="formBook">
+            <div class="form-group">
+                <label>Book Title *</label>
+                <input type="text" id="bTitle" placeholder="Enter book title">
+            </div>
+            <div class="form-group">
+                <label>Category *</label>
+                <input type="text" id="bCat" placeholder="e.g. Poetry, Philosophy, Fiction">
+            </div>
+            <div class="form-group">
+                <label>Short Description <span style="color:var(--text-muted); font-weight:400;">(shown on card)</span></label>
+                <textarea id="bDescription" rows="2" placeholder="Write a short description that visitors will see on the book card..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Full Content *</label>
+                <textarea id="bContent" rows="7" placeholder="Write or paste the full book content here..."></textarea>
+            </div>
+
+            <!-- Cover Image Upload -->
+            <div class="form-group">
+                <label>Cover Image <span style="color:var(--text-muted); font-weight:400;">(Optional — shown on card)</span></label>
+                <input type="file" id="bImage" accept="image/*" style="display:none;" onchange="onBookImageSelected()">
+                <div id="bImageLabel" class="file-picker" onclick="triggerBookImage()">
+                    <i class="fas fa-image"></i>
+                    <span>Click to choose an image from your device</span>
+                </div>
+            </div>
+
+            <!-- PDF Upload -->
+            <div class="form-group">
+                <label>PDF File <span style="color:var(--text-muted); font-weight:400;">(Optional — for download)</span></label>
+                <input type="file" id="bFile" accept=".pdf" style="display:none;" onchange="onBookFileSelected()">
+                <div id="bFileLabel" class="file-picker" onclick="triggerBookFile()">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Click to choose a PDF from your device</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="uploadBook()">
+                <i class="fas fa-upload"></i> &nbsp; Publish Book
+            </button>
+        </div>
+
+        <!-- ===== UPLOAD POEM FORM ===== -->
+        <div id="formPoem" style="display:none;">
+            <div class="form-group">
+                <label>Poem Title *</label>
+                <input type="text" id="pTitle" placeholder="Enter poem title">
+            </div>
+            <div class="form-group">
+                <label>Author</label>
+                <input type="text" id="pAuthor" placeholder="e.g. Damie">
+            </div>
+            <div class="form-group">
+                <label>Short Description <span style="color:var(--text-muted); font-weight:400;">(shown on card)</span></label>
+                <textarea id="pDescription" rows="2" placeholder="Write a short description that visitors will see on the poem card..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Poem Content *</label>
+                <textarea id="pContent" rows="8" placeholder="Write the full poem here..."></textarea>
+            </div>
+
+            <!-- Cover Image Upload -->
+            <div class="form-group">
+                <label>Cover Image <span style="color:var(--text-muted); font-weight:400;">(Optional)</span></label>
+                <input type="file" id="pImage" accept="image/*" style="display:none;" onchange="onFileSelected('pImage','pImageLabel','fas fa-image')">
+                <div id="pImageLabel" class="file-picker" onclick="triggerFile('pImage')">
+                    <i class="fas fa-image"></i>
+                    <span>Click to choose an image from your device</span>
+                </div>
+            </div>
+
+            <!-- PDF Upload -->
+            <div class="form-group">
+                <label>PDF File <span style="color:var(--text-muted); font-weight:400;">(Optional — for download)</span></label>
+                <input type="file" id="pFile" accept=".pdf" style="display:none;" onchange="onPoemFileSelected()">
+                <div id="pFileLabel" class="file-picker" onclick="triggerPoemFile()">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Click to choose a PDF from your device</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="uploadPoem()">
+                <i class="fas fa-feather-alt"></i> &nbsp; Publish Poem
+            </button>
+        </div>
+
+        <!-- ===== HOME MESSAGE FORM ===== -->
+        <div id="formMsg" style="display:none;">
+            <div class="form-group">
+                <label>Message for Visitors</label>
+                <textarea id="adminMsgInput" rows="4" placeholder="Write a message that will appear on the Home page for all visitors..."></textarea>
+            </div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <button class="btn-primary" onclick="saveAdminMessage()">
+                    <i class="fas fa-paper-plane"></i> &nbsp; Publish Message
+                </button>
+                <button class="btn-secondary" onclick="clearAdminMessage()">
+                    <i class="fas fa-times"></i> &nbsp; Clear Message
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="page-padding"></div>
+
+<footer>
+    <marquee>MISSION: To spread wisdom through poetry and literature &nbsp;|&nbsp; VISION: To be the leading digital library now and onwards &nbsp;|&nbsp; Lucky Ones Library © 2025</marquee>
+</footer>
+
+<script src="script.js"></script>
+<script>
+    function checkAdminSession() {
+        const admin = sessionStorage.getItem('isAdmin') === 'true';
+        document.getElementById('adminPanel').style.display = admin ? 'block'        : 'none';
+        document.getElementById('logoutBtn').style.display  = admin ? 'inline-block' : 'none';
+        document.getElementById('adminBtn').style.display   = admin ? 'none'         : 'inline-block';
+    }
+    function adminLogout() { sessionStorage.removeItem('isAdmin'); window.location.reload(); }
+    function switchTab(tab) {
+        ['book','poem','msg'].forEach(t => {
+            document.getElementById(`form${t.charAt(0).toUpperCase()+t.slice(1)}`).style.display = tab === t ? 'block' : 'none';
+            document.getElementById(`tab${t.charAt(0).toUpperCase()+t.slice(1)}`).className = tab === t ? 'btn-primary' : 'btn-secondary';
+        });
+    }
+    checkAdminSession();
+</script>
+</body>
+</html>

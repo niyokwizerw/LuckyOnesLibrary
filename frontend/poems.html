@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Ones Library | Poems</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<nav>
+    <div class="logo">✨ Lucky Ones Library</div>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="books.html">Books</a>
+        <a href="poems.html" class="active">Poems</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin-login.html" id="adminBtn" style="display:none; background:rgba(185,147,90,0.15); color:var(--gold-main);"><i class="fas fa-lock"></i> Admin</a>
+        <a href="#" id="logoutBtn" onclick="adminLogout()" style="display:none; color:#e74c3c;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    <div class="search-box">
+        <input type="text" id="poemSearch" onkeyup="searchPoems()" placeholder="Search poems...">
+    </div>
+</nav>
+
+<div class="page-header">
+    <p class="page-header-tag"><i class="fas fa-feather-alt"></i> &nbsp; Poetry Collection</p>
+    <h1>Our <span style="color:var(--gold-main);">Poems</span></h1>
+    <p>Words that move the soul</p>
+</div>
+
+<div class="container">
+    <div style="margin-bottom:28px;">
+        <a href="index.html" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+    <div id="allPoemsGrid" class="books-grid">
+        <p style="color:var(--text-muted);">Loading poems...</p>
+    </div>
+</div>
+
+<!-- POEM MODAL -->
+<div id="poemModal" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closePoem()">&times;</button>
+        <p id="mPoemAuthor" style="font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold-main); margin-bottom:10px;"></p>
+        <h1 id="mPoemTitle"></h1>
+        <div id="mPoemContent" class="modal-content" style="font-style:italic; line-height:2.1; margin-top:20px;"></div>
+        <div class="modal-actions">
+            <button class="btn-like" onclick="likePoem()">
+                <i class="fas fa-heart"></i> Like &nbsp;<span id="mPoemLikeCount">0</span>
+            </button>
+            <!-- ✅ Download button in modal -->
+            <a id="mPoemDownload" href="#" download class="btn-download" style="display:none;">
+                <i class="fas fa-download"></i> Download PDF
+            </a>
+            <button class="btn-delete" id="poemDeleteBtn" onclick="deletePoemModal()" style="display:none;">
+                <i class="fas fa-trash"></i> Delete
+            </button>
+        </div>
+        <div class="comments-section">
+            <h3><i class="fas fa-comments"></i> Comments</h3>
+            <div class="comments-list" id="mPoemCommentsList"></div>
+            <div class="form-group">
+                <label>Your Email</label>
+                <input type="email" id="pcEmail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>Your Comment</label>
+                <textarea id="pcText" rows="3" placeholder="Share your thoughts about this poem..."></textarea>
+            </div>
+            <button class="btn-primary" onclick="submitPoemComment()">
+                <i class="fas fa-paper-plane"></i> Send Comment
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="page-padding"></div>
+<footer>
+    <marquee>MISSION: To spread wisdom through poetry and literature &nbsp;|&nbsp; VISION: To be the leading digital library now and onwards &nbsp;|&nbsp; Lucky Ones Library © 2025</marquee>
+</footer>
+<script src="script.js"></script>
+<script>
+    function checkAdminSession() {
+        const admin = sessionStorage.getItem('isAdmin') === 'true';
+        document.getElementById('logoutBtn').style.display = admin ? 'inline-block' : 'none';
+        document.getElementById('adminBtn').style.display  = admin ? 'none' : 'inline-block';
+    }
+    function adminLogout() { sessionStorage.removeItem('isAdmin'); window.location.reload(); }
+    checkAdminSession();
+</script>
+</body>
+</html>
