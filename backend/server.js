@@ -2,16 +2,16 @@
 // LUCKY ONES LIBRARY - server.js (COMPLETE v3)
 // ============================================
 
-const express    = require('express');
-const mongoose   = require('mongoose');
-const cors       = require('cors');
-const multer     = require('multer');
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const multer = require('multer');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const Book = require('./models/Book');
 const Poem = require('./models/Poem');
-const app  = express();
+const app = express();
 
 // ============================================
 // MIDDLEWARES
@@ -40,7 +40,7 @@ const upload = multer({
 
 // Accept both pdf and image fields
 const uploadFields = upload.fields([
-    { name: 'pdf',   maxCount: 1 },
+    { name: 'pdf', maxCount: 1 },
     { name: 'image', maxCount: 1 }
 ]);
 
@@ -126,8 +126,8 @@ app.post('/api/books', uploadFields, async (req, res) => {
             category,
             description: description || '',
             content,
-            pdfPath:     req.files?.pdf?.[0]?.filename   || null,
-            coverImage:  req.files?.image?.[0]?.filename || null
+            pdfPath: req.files?.pdf?.[0]?.filename || null,
+            coverImage: req.files?.image?.[0]?.filename || null
         });
         await newBook.save();
         res.status(201).json(newBook);
@@ -196,11 +196,11 @@ app.post('/api/poems', uploadFields, async (req, res) => {
 
         const newPoem = new Poem({
             title,
-            author:      author || 'Damie',
+            author: author || 'Damie',
             description: description || '',
             content,
-            pdfPath:     req.files?.pdf?.[0]?.filename   || null,
-            coverImage:  req.files?.image?.[0]?.filename || null
+            pdfPath: req.files?.pdf?.[0]?.filename || null,
+            coverImage: req.files?.image?.[0]?.filename || null
         });
         await newPoem.save();
         res.status(201).json(newPoem);
@@ -243,11 +243,12 @@ app.post('/api/poems/:id/comment', async (req, res) => {
 });
 
 // ============================================
-// START SERVER
+// START SERVER (Vercel & Local Compatible)
 // ============================================
-// Replace this block at the bottom of your server.js:
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+const PORT = process.env.PORT || 5000;
 
-// With this export line:
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+}
+
 module.exports = app;
