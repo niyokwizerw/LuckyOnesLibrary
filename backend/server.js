@@ -109,9 +109,9 @@ app.get('/api/books', async (req, res) => {
 
 app.get('/api/books/:id', async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
-        if (!book) return res.status(404).json({ msg: 'Book not found' });
-        res.json(book);
+        const foundBook = await Book.findById(req.params.id);
+        if (!foundBook) return res.status(404).json({ msg: 'Book not found' });
+        res.json(foundBook);
     } catch (err) { res.status(500).json({ msg: 'Server error', error: err.message }); }
 });
 
@@ -139,33 +139,33 @@ app.post('/api/books', uploadFields, async (req, res) => {
 
 app.delete('/api/books/:id', async (req, res) => {
     try {
-        const book = await Book.findByIdAndDelete(req.params.id);
-        if (!book) return res.status(404).json({ msg: 'Book not found' });
+        const deletedBook = await Book.findByIdAndDelete(req.params.id);
+        if (!deletedBook) return res.status(404).json({ msg: 'Book not found' });
         res.json({ msg: 'Book deleted successfully.' });
     } catch (err) { res.status(500).json({ msg: 'Server error', error: err.message }); }
 });
 
 app.post('/api/books/:id/like', async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
-        if (!book) return res.status(404).json({ msg: 'Book not found' });
-        book.likes = (book.likes || 0) + 1;
-        await book.save();
-        await sendNotification(`❤️ New Like on "${book.title}"`, `Someone liked: "${book.title}"\nTotal likes: ${book.likes}`);
-        res.json({ likes: book.likes });
+        const foundBook = await Book.findById(req.params.id);
+        if (!foundBook) return res.status(404).json({ msg: 'Book not found' });
+        foundBook.likes = (foundBook.likes || 0) + 1;
+        await foundBook.save();
+        await sendNotification(`❤️ New Like on "${foundBook.title}"`, `Someone liked: "${foundBook.title}"\nTotal likes: ${foundBook.likes}`);
+        res.json({ likes: foundBook.likes });
     } catch (err) { res.status(500).json({ msg: 'Server error', error: err.message }); }
 });
 
 app.post('/api/books/:id/comment', async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
-        if (!book) return res.status(404).json({ msg: 'Book not found' });
+        const foundBook = await Book.findById(req.params.id);
+        if (!foundBook) return res.status(404).json({ msg: 'Book not found' });
         const { email, text } = req.body;
         if (!email || !text) return res.status(400).json({ msg: 'Email and comment are required.' });
-        book.comments.push({ userEmail: email, text });
-        await book.save();
-        await sendNotification(`💬 New Comment on "${book.title}"`, `${email} commented:\n\n"${text}"`);
-        res.json(book);
+        foundBook.comments.push({ userEmail: email, text });
+        await foundBook.save();
+        await sendNotification(`💬 New Comment on "${foundBook.title}"`, `${email} commented:\n\n"${text}"`);
+        res.json(foundBook);
     } catch (err) { res.status(500).json({ msg: 'Server error', error: err.message }); }
 });
 
